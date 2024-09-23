@@ -11,7 +11,7 @@ function copyLicensePlugin() {
   return {
     name: "copy-license",
     closeBundle: async () => {
-      await fs.copyFile("../LICENSE.md", "dist/LICENSE.md");
+      await fs.copyFile("../LICENSE.txt", "dist/LICENSE.txt");
       await fs.copyFile("../README.md", "dist/README.md");
     },
   };
