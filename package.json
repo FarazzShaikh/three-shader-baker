@@ -1,0 +1,21 @@
+{
+  "name": "three-shader-baker-monorepo",
+  "description": "Monorepo for three-shader-baker and its example",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "repository": "https://github.com/FarazzShaikh/three-shader-baker",
+  "author": "Faraz Shaikh <farazzshaikh@gmail.com>",
+  "license": "AGPL-3.0-or-later",
+  "workspaces": [
+    "package",
+    "example"
+  ],
+  "scripts": {
+    "prebuild": "yarn --cwd package build",
+    "build": "yarn --cwd example build",
+    "preview": "yarn --cwd example preview",
+    "dev": "yarn --cwd example dev",
+    "release": "yarn --cwd package release"
+  }
+}

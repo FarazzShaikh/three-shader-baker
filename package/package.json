@@ -1,0 +1,61 @@
+{
+  "name": "three-shader-baker",
+  "description": "Bake your Three.js shaders or materials into textures!",
+  "private": false,
+  "version": "1.0.0",
+  "repository": "https://github.com/FarazzShaikh/three-shader-baker",
+  "author": "Faraz Shaikh <farazzshaikh@gmail.com>",
+  "license": "AGPL-3.0-or-later",
+  "files": [
+    "dist/**"
+  ],
+  "homepage": "",
+  "main": "dist/entry/cjs/vanilla.cjs",
+  "module": "dist/entry/es/vanilla.js",
+  "types": "dist/React/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/entry/es/vanilla.js",
+      "require": "./dist/entry/cjs/vanilla.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/entry/es/react.js",
+      "require": "./dist/entry/cjs/react.cjs",
+      "types": "./dist/React/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "release": "yarn build && npm version"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/three": "^0.168.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "globals": "^15.9.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.0.1",
+    "vite": "^5.4.1",
+    "vite-plugin-dts": "^4.2.1"
+  },
+  "peerDependencies": {
+    "@react-three/fiber": ">=8.0",
+    "react": ">=18.0",
+    "three": ">=0.163"
+  },
+  "peerDependenciesMeta": {
+    "@react-three/fiber": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  },
+  "dependencies": {}
+}
