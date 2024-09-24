@@ -45,4 +45,12 @@ export class DilationMaterial extends THREE.ShaderMaterial {
       `,
     });
   }
+
+  set texture(value: THREE.Texture) {
+    this.uniforms.uTexture.value = value;
+  }
+
+  set dilation(value: number) {
+    this.uniforms.uDilation.value = value;
+  }
 }

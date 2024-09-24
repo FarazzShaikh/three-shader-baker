@@ -35,7 +35,7 @@ export function TextureViewer3D({ onRandomize }: { onRandomize: () => void }) {
 
   const onRebake = () => {
     const size = parseInt(inputRef.current.value);
-    bake(null, size);
+    bake(null, { size });
     for (const fbo of fbos) {
       fbo["__texturePreview_needsUpdate"] = true;
     }
@@ -119,6 +119,7 @@ export function TextureViewer3D({ onRandomize }: { onRandomize: () => void }) {
               size="lg"
               fontFamily="monospace"
               as="a"
+              color="black"
               href="https://github.com/FarazzShaikh/three-shader-baker"
               target="_blank"
               _hover={{ textDecoration: "underline", color: "blue" }}
@@ -126,12 +127,14 @@ export function TextureViewer3D({ onRandomize }: { onRandomize: () => void }) {
               three-shader-baker
             </Heading>
             <HStack>
-              <Text whiteSpace="nowrap" fontFamily="monospace">
+              <Text color="black" whiteSpace="nowrap" fontFamily="monospace">
                 Texture Size:
               </Text>
               <Input
                 variant="filled"
                 type="number"
+                color="black"
+                bgColor="whiteAlpha.400"
                 placeholder="size"
                 ref={inputRef}
                 defaultValue={2048}

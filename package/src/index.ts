@@ -2,9 +2,11 @@ import * as THREE from "three";
 import { DilationMaterial } from "./DilationMaterial";
 import { FullScreenQuad } from "./FullScreenQuad";
 
-interface BakeOptions {
+export interface BakeOptions {
   size?: number;
   target?: THREE.WebGLRenderTarget | null;
+  scene?: THREE.Scene;
+  dilation?: number;
 }
 
 export class ShaderBaker {
@@ -34,7 +36,6 @@ export class ShaderBaker {
 
   bake(
     gl: THREE.WebGLRenderer,
-    scene: THREE.Scene,
     mesh: THREE.Mesh,
     options: BakeOptions
   ): THREE.WebGLRenderTarget {
@@ -46,6 +47,8 @@ export class ShaderBaker {
         stencilBuffer: false,
         format: THREE.RGBAFormat,
       });
+    const scene = options.scene;
+    const dilation = options.dilation || 2;
 
     targetFbo.setSize(size, size);
     this._bakeFbo.setSize(size, size);
@@ -95,8 +98,7 @@ export class ShaderBaker {
 
     const prevEnvMap = material.envMap;
     const prevSide = material.side;
-    material.envMap = scene.environment;
-    material.needsUpdate = true;
+    if (scene) material.envMap = scene.environment;
     material.side = THREE.DoubleSide;
 
     gl.setRenderTarget(this._bakeFbo);
@@ -106,7 +108,8 @@ export class ShaderBaker {
 
     gl.setRenderTarget(targetFbo);
     this._fsQuad.material = this._dilationMaterial;
-    this._dilationMaterial.uniforms.uTexture.value = this._bakeFbo.texture;
+    this._dilationMaterial.texture = this._bakeFbo.texture;
+    this._dilationMaterial.dilation = dilation;
     this._fsQuad.render(gl);
     gl.setRenderTarget(null);
 

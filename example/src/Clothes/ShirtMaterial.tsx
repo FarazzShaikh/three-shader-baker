@@ -50,10 +50,10 @@ export function ShirtMaterial({ seed }: { seed: number }) {
     () => ({
       uSeed: { value: 0 },
       uColorA: {
-        value: new Color(palette[0]),
+        value: new Color(palette[3]),
       },
       uColorB: {
-        value: new Color(palette[1]),
+        value: new Color(palette[4]),
       },
     }),
     []

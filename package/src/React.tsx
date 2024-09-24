@@ -12,7 +12,10 @@ interface TextureBakerAPI {
   };
   bake: (
     mesh?: THREE.Mesh | THREE.Mesh[],
-    size?: number
+    options?: {
+      dilation?: number;
+      size?: number;
+    }
   ) => TextureBakerAPI["textures"];
 }
 
@@ -20,10 +23,12 @@ const context = React.createContext<TextureBakerAPI>(null!);
 
 interface TextureBakerProps {
   size?: number;
+  dilation?: number;
 }
 
 export function ShaderBaker({
   size: propsSize = 1024,
+  dilation = 2,
   children,
 }: React.PropsWithChildren<TextureBakerProps>) {
   const gl = useThree((s) => s.gl);
@@ -42,7 +47,7 @@ export function ShaderBaker({
     () => ({
       renderTargets,
       textures,
-      bake: (mesh, size) => {
+      bake: (mesh, options) => {
         const meshes: THREE.Mesh[] = mesh
           ? Array.isArray(mesh)
             ? mesh
@@ -65,11 +70,13 @@ export function ShaderBaker({
         let didSetNewRenderTarget = false;
         for (const mesh of meshes) {
           const _size =
-            mesh.userData["__shaderBaker_size"] || size || propsSize;
+            mesh.userData["__shaderBaker_size"] || options?.size || propsSize;
           const currentFbo = renderTargets[mesh.uuid];
-          const fbo = baker.bake(gl, scene, mesh, {
+          const fbo = baker.bake(gl, mesh, {
             target: currentFbo,
             size: _size,
+            scene,
+            dilation: options?.dilation || dilation,
           });
 
           if (
@@ -90,7 +97,7 @@ export function ShaderBaker({
         return newTextures;
       },
     }),
-    [gl, propsSize, renderTargets, baker]
+    [dilation, scene, gl, propsSize, renderTargets, baker]
   );
 
   React.useEffect(() => () => baker.dispose(), []);
