@@ -1,38 +1,32 @@
 import {
+  AccumulativeShadows,
+  Bounds,
+  ContactShadows,
   Environment,
   OrbitControls,
-  PerspectiveCamera,
-  useGLTF,
+  RandomizedLight,
 } from "@react-three/drei";
-import { Canvas, useThree } from "@react-three/fiber";
-import * as THREE from "three";
+import { Canvas } from "@react-three/fiber";
 import "./styles.css";
 
-import { ShaderBaker, useShaderBaker } from "texture-baker/react";
+import {
+  ShaderBaker,
+  ShaderBakerExclusion,
+  useShaderBaker,
+} from "texture-baker/react";
 
-import { useEffect, useRef } from "react";
-import Perlin from "./Perlin";
-import { useTextureViewer } from "./TextureViewer";
+import { useEffect, useState } from "react";
 
-import CSMReact from "three-custom-shader-material";
+import { EffectComposer } from "@react-three/postprocessing";
+import { isDesktop } from "react-device-detect";
+import { MathUtils } from "three";
+import { Clothes } from "./Clothes";
+import { N8AO } from "./N8AO";
+import { TextureViewer3D } from "./TextureViewer3D";
 
 function Thing() {
-  const { nodes } = useGLTF("/monkeys.glb") as any;
-  const scene = useThree((state) => state.scene);
-  const { bake, renderTargets } = useShaderBaker();
-
-  const materialRef = useRef<any>();
-
-  useTextureViewer(Object.values(renderTargets), () => {
-    materialRef.current.uniforms.uSeed.value = Math.random();
-  });
-
-  useEffect(() => {
-    for (const [uuid, texture] of Object.entries(renderTargets)) {
-      const obj = scene.getObjectByProperty("uuid", uuid);
-      texture["__texturePreview_name"] = obj?.name || "Unknown";
-    }
-  }, [renderTargets]);
+  const { bake } = useShaderBaker();
+  const [seed, setSeed] = useState(0);
 
   useEffect(() => {
     bake();
@@ -40,42 +34,15 @@ function Thing() {
 
   return (
     <>
-      <mesh
-        name="Suzanne"
-        castShadow
-        receiveShadow
-        geometry={nodes.Suzanne.geometry}
-      >
-        <CSMReact
-          ref={materialRef}
-          color="white"
-          baseMaterial={THREE.MeshStandardMaterial}
-          vertexShader={`
-            varying vec3 vPosition;
+      <Clothes seed={seed} />
 
-            void main() {
-              vPosition = position;
-              gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-            }  
-          `}
-          fragmentShader={`
-            varying vec3 vPosition;
-
-            uniform float uSeed;
-
-            ${Perlin}
-
-            void main() {
-              float n = cnoise((vPosition + vec3(uSeed * 10000.0)) * 10.0);
-              n = abs(n);
-              csm_DiffuseColor = vec4(vec3(n), 1.0);
-            }
-          `}
-          uniforms={{
-            uSeed: { value: 0 },
+      <ShaderBakerExclusion>
+        <TextureViewer3D
+          onRandomize={() => {
+            setSeed(Math.random());
           }}
         />
-      </mesh>
+      </ShaderBakerExclusion>
     </>
   );
 }
@@ -83,22 +50,72 @@ function Thing() {
 export default function App() {
   return (
     <>
-      <Canvas shadows>
-        <fog attach="fog" args={[0xffffff, 10, 90]} />
+      <Canvas
+        shadows
+        camera={{
+          position: [isDesktop ? -2 : 0, 1, 5],
+        }}
+      >
+        <OrbitControls
+          enablePan={false}
+          minDistance={1}
+          maxDistance={8}
+          maxPolarAngle={MathUtils.degToRad(100)}
+          minPolarAngle={MathUtils.degToRad(20)}
+          minAzimuthAngle={MathUtils.degToRad(-90)}
+          maxAzimuthAngle={MathUtils.degToRad(90)}
+          makeDefault
+          target={[0, 1, 0]}
+        />
 
-        <OrbitControls makeDefault />
-        <PerspectiveCamera fov={39.6} position={[-2, 2, 5]} makeDefault />
+        <ContactShadows
+          opacity={0.5}
+          scale={10}
+          blur={1}
+          far={10}
+          resolution={256}
+          color="#000000"
+        />
 
-        <axesHelper args={[10]} />
+        <AccumulativeShadows
+          temporal
+          frames={100}
+          scale={12}
+          alphaTest={0.85}
+          position={[0, 0.04, 0]}
+        >
+          <RandomizedLight
+            amount={10}
+            radius={10}
+            ambient={0.2}
+            position={[-5, 5, -5]}
+            bias={0.001}
+          />
+        </AccumulativeShadows>
 
         <ShaderBaker>
-          <Thing />
+          <Bounds fit clip observe margin={isDesktop ? 1.4 : 0.7}>
+            <Thing />
+          </Bounds>
         </ShaderBaker>
         <Environment
           preset="city"
-          blur={0.05}
-          // files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/table_mountain_2_puresky_1k.hdr"
+          background
+          backgroundBlurriness={0.7}
+          environmentIntensity={2}
+          backgroundRotation={[0, MathUtils.degToRad(80), 0]}
         />
+
+        <EffectComposer enableNormalPass>
+          <N8AO
+            halfRes
+            color="black"
+            aoRadius={0.2}
+            intensity={7}
+            aoSamples={6}
+            denoiseSamples={4}
+          />
+        </EffectComposer>
       </Canvas>
 
       {/* <Leva collapsed /> */}
