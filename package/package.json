@@ -3,13 +3,13 @@
   "description": "Bake your Three.js shaders or materials into textures!",
   "private": false,
   "version": "1.0.0",
+  "homepage": "https://farazzshaikh.github.io/three-shader-baker/",
   "repository": "https://github.com/FarazzShaikh/three-shader-baker",
   "author": "Faraz Shaikh <farazzshaikh@gmail.com>",
   "license": "AGPL-3.0-or-later",
   "files": [
     "dist/**"
   ],
-  "homepage": "",
   "main": "dist/entry/cjs/vanilla.cjs",
   "module": "dist/entry/es/vanilla.js",
   "types": "dist/React/index.d.ts",

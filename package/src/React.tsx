@@ -52,10 +52,8 @@ export function ShaderBaker({
           groupRef.current.traverse((object) => {
             if (
               object instanceof THREE.Mesh &&
-              !(
-                object.userData["__shaderBaker_isExcluded"] ||
-                object.parent?.userData["__shaderBaker_isExcluded"]
-              )
+              !object.userData["__shaderBaker_isExcluded"] &&
+              !object.parent?.userData["__shaderBaker_isExcluded"]
             ) {
               meshes.push(object);
             }
@@ -107,7 +105,7 @@ export function ShaderBaker({
 export function ShaderBakerExclusion({ children }: React.PropsWithChildren) {
   const groupRef = React.useRef<THREE.Group>(null!);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     groupRef.current.traverse((object) => {
       object.userData["__shaderBaker_isExcluded"] = true;
     });

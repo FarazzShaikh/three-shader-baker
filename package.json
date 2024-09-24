@@ -7,6 +7,7 @@
   "repository": "https://github.com/FarazzShaikh/three-shader-baker",
   "author": "Faraz Shaikh <farazzshaikh@gmail.com>",
   "license": "AGPL-3.0-or-later",
+  "homepage": "https://farazzshaikh.github.io/three-shader-baker/",
   "workspaces": [
     "package",
     "example"

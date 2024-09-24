@@ -5,7 +5,7 @@ import CSM from "three-custom-shader-material";
 
 import { animate, AnimationControls } from "motion";
 import colors from "nice-color-palettes";
-import perlin from "./shaders/Perlin";
+import Perlin from "./shaders/perlin";
 
 export function SkirtMaterial({ seed }: { seed: number }) {
   const palette = colors[2];
@@ -29,7 +29,7 @@ export function SkirtMaterial({ seed }: { seed: number }) {
     uniform vec3 uColorA;
     uniform vec3 uColorB;
 
-    ${perlin}
+    ${Perlin}
 
     void main() {
       float n = cnoise((vPosition + vec3(uSeed)) * 10.0);
