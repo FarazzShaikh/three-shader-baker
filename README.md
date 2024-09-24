@@ -4,7 +4,7 @@
 <br />
 
 <p align="center">
-  <a href="https://farazzshaikh.github.io/three-shader-baker/" target="_blank"><img width="100%" src="./assets/example-screenshot.png" alt="Waves" /></a>
+  <a href="https://farazzshaikh.github.io/three-shader-baker/" target="_blank"><img width="100%" src="https://github.com/FarazzShaikh/three-shader-baker/blob/main/assets/example-screenshot.png?raw=true" alt="Shader Baker example" /></a>
 </p>
 </p>
 <p align="middle">
