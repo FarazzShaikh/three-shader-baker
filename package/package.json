@@ -2,7 +2,7 @@
   "name": "three-shader-baker",
   "description": "Bake your Three.js shaders or materials into textures!",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://farazzshaikh.github.io/three-shader-baker/",
   "repository": "https://github.com/FarazzShaikh/three-shader-baker",
   "author": "Faraz Shaikh <farazzshaikh@gmail.com>",
