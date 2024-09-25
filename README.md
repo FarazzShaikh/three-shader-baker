@@ -2,6 +2,7 @@
 <h3 align="center">Bake your Three.js shaders or materials into textures!</h3>
 
 <br />
+<br />
 
 <p align="center">
   <a href="https://farazzshaikh.github.io/three-shader-baker/" target="_blank"><img width="100%" src="https://github.com/FarazzShaikh/three-shader-baker/blob/main/assets/example-screenshot.png?raw=true" alt="Shader Baker example" /></a>
