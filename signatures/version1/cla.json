@@ -1,3 +1,20 @@
 {
-   "signedContributors": []
+  "signedContributors": [
+    {
+      "name": "HandmadeDumpling",
+      "id": 87331274,
+      "comment_id": 2373595399,
+      "created_at": "2024-09-25T09:45:42Z",
+      "repoId": 861940858,
+      "pullRequestNo": 3
+    },
+    {
+      "name": "HandmadeDumpling",
+      "id": 87331274,
+      "comment_id": 2373601511,
+      "created_at": "2024-09-25T09:48:08Z",
+      "repoId": 861940858,
+      "pullRequestNo": 3
+    }
+  ]
 }
