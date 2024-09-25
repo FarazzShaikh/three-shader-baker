@@ -104,6 +104,7 @@ You can set the following helpers on `THREE.Mesh.userData` to control the baking
 
 ## Gotchas
 
+- **(React only)** The `bake` functions from `const { bake } = useShaderBaker()` is memoized. Make sure to pass it as a dependency in your `useEffect` hook otherwise it will unnecessary state updates.
 - **(React only)** The order of priority for the `size` prop is as follows:
   1. `__shaderBaker_size` on the mesh
   2. `size` parameter in the `bake` function
@@ -133,7 +134,7 @@ For now, it is recommended to black out the screen or show a loading screen whil
 
 Creates a new instance of the ShaderBaker.
 
-#### `bake(renderer: THREE.WebGLRenderer, mesh: THREE.Mesh, options: Object): THREE.WebGLRenderTarget`
+#### `ShaderBaker.bake(renderer: THREE.WebGLRenderer, mesh: THREE.Mesh, options: Object): THREE.WebGLRenderTarget`
 
 Bakes the shader/material of the mesh into a render target.
 
@@ -144,6 +145,10 @@ Bakes the shader/material of the mesh into a render target.
   - `size` - Number. Size of the baked texture. Default is 1024.
   - `target` - THREE.WebGLRenderTarget. If provided, the baked texture will be rendered to this target.
   - `dilation` - Number. Number of pixels to dilate the texture by. Default is 2. This is useful to prevent seam artifacts.
+
+#### `ShaderBaker.dispose()`
+
+Disposes of the ShaderBaker instance and its associated resources.
 
 #### `getTextureAsDataUrl(renderer: THREE.WebGLRenderer, texture: THREE.Texture): string`
 

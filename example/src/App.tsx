@@ -53,7 +53,7 @@ export default function App() {
       <Canvas
         shadows
         camera={{
-          position: [isDesktop ? -2 : 0, 1, 5],
+          position: [-2, 1, 5],
         }}
       >
         <OrbitControls
@@ -94,7 +94,7 @@ export default function App() {
         </AccumulativeShadows>
 
         <ShaderBaker>
-          <Bounds fit clip observe margin={isDesktop ? 1.4 : 0.7}>
+          <Bounds fit clip observe margin={isDesktop ? 1.4 : 0.9}>
             <Thing />
           </Bounds>
         </ShaderBaker>

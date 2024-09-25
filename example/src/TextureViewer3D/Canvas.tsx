@@ -70,7 +70,7 @@ export const Canvas = memo(
       id = requestAnimationFrame(animate);
 
       return () => cancelAnimationFrame(id);
-    }, [ctx]);
+    }, [fbo, ctx]);
 
     return (
       <VStack>

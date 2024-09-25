@@ -4,18 +4,19 @@ import {
   Heading,
   HStack,
   Input,
-  Link,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createRoot } from "react-dom/client";
 import { useShaderBaker } from "texture-baker/react";
 import { Canvas } from "./Canvas";
 
 export function TextureViewer3D({ onRandomize }: { onRandomize: () => void }) {
   const gl = useThree((state) => state.gl);
+  const events = useThree((state) => state.events);
   const scene = useThree((state) => state.scene);
   const { bake, renderTargets } = useShaderBaker();
   const fbos = useMemo(() => Object.values(renderTargets), [renderTargets]);
@@ -40,6 +41,87 @@ export function TextureViewer3D({ onRandomize }: { onRandomize: () => void }) {
       fbo["__texturePreview_needsUpdate"] = true;
     }
   };
+
+  useEffect(() => {
+    if (!events.connected) return;
+
+    const parentElement = events.connected;
+    const container = document.createElement("div");
+    parentElement.parentElement.appendChild(container);
+
+    const root = createRoot(container);
+    root.render(
+      <ChakraProvider>
+        <VStack
+          position="absolute"
+          top={0}
+          left="50%"
+          transform="translateX(-50%)"
+          p={4}
+          width="100%"
+        >
+          <Heading
+            size="lg"
+            fontFamily="monospace"
+            as="a"
+            color="black"
+            href="https://github.com/FarazzShaikh/three-shader-baker"
+            target="_blank"
+            textDecoration="underline"
+            _hover={{ color: "blue" }}
+          >
+            three-shader-baker
+          </Heading>
+          <HStack>
+            <Text color="black" whiteSpace="nowrap" fontFamily="monospace">
+              Texture Size:
+            </Text>
+            <Input
+              variant="filled"
+              type="number"
+              color="black"
+              bgColor="whiteAlpha.400"
+              placeholder="size"
+              ref={inputRef}
+              defaultValue={2048}
+            />
+          </HStack>
+        </VStack>
+        <VStack
+          position="absolute"
+          bottom={0}
+          left="50%"
+          transform="translateX(-50%)"
+          p={4}
+          width="100%"
+        >
+          {!hidden && (
+            <Text size="xs" padding={2} borderRadius={5} color="white">
+              Bake your Three.js shaders into textures!
+            </Text>
+          )}
+
+          <HStack>
+            <Button onClick={onRandomize}>Randomize 🎲</Button>
+            <Button onClick={onRebake}>Bake! 🍰</Button>
+            <Button onClick={() => setHidden((s) => !s)}>
+              {hidden ? "Show" : "Hide"} UI {hidden ? "😊" : "🙂"}
+            </Button>
+          </HStack>
+        </VStack>
+      </ChakraProvider>
+    );
+
+    parentElement.parentElement.style.display = "flex";
+
+    parentElement.style.flex = "1";
+    parentElement.style.width = "50%";
+
+    return () => {
+      root.unmount();
+      container.remove();
+    };
+  }, [onRebake, hidden, events.connected]);
 
   return (
     <>
@@ -110,68 +192,6 @@ export function TextureViewer3D({ onRandomize }: { onRandomize: () => void }) {
             />
             <circle cx="180" cy="50" r="20" fill="white" />
           </svg>
-        </ChakraProvider>
-      </Html>
-      <Html transform center scale={hidden ? 0 : 0.1} position={[0, 1.75, 0.3]}>
-        <ChakraProvider>
-          <VStack>
-            <Heading
-              size="lg"
-              fontFamily="monospace"
-              as="a"
-              color="black"
-              href="https://github.com/FarazzShaikh/three-shader-baker"
-              target="_blank"
-              _hover={{ textDecoration: "underline", color: "blue" }}
-            >
-              three-shader-baker
-            </Heading>
-            <HStack>
-              <Text color="black" whiteSpace="nowrap" fontFamily="monospace">
-                Texture Size:
-              </Text>
-              <Input
-                variant="filled"
-                type="number"
-                color="black"
-                bgColor="whiteAlpha.400"
-                placeholder="size"
-                ref={inputRef}
-                defaultValue={2048}
-              />
-            </HStack>
-          </VStack>
-        </ChakraProvider>
-      </Html>
-      <Html transform center scale={0.1} position={[0, 0.0, 0.3]}>
-        <ChakraProvider>
-          <VStack>
-            {!hidden && (
-              <Text bgColor="white" padding={2} borderRadius={5} color="black">
-                Bake your Three.js shaders into textures!
-              </Text>
-            )}
-
-            <HStack>
-              <Button onClick={onRandomize}>Randomize 🎲</Button>
-              <Button onClick={onRebake}>Bake! 🍰</Button>
-              <Button onClick={() => setHidden((s) => !s)}>
-                {hidden ? "Show" : "Hide"} UI {hidden ? "😊" : "🙂"}
-              </Button>
-            </HStack>
-            {!hidden && (
-              <Text color="white">
-                Made with ❤️ by{" "}
-                <Link
-                  target="_blank"
-                  href="https://www.x.com/cantbefaraz"
-                  _hover={{ textDecoration: "underline", color: "cyan" }}
-                >
-                  Faraz Shaikh
-                </Link>
-              </Text>
-            )}
-          </VStack>
         </ChakraProvider>
       </Html>
     </>

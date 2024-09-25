@@ -100,7 +100,21 @@ export function ShaderBaker({
     [dilation, scene, gl, propsSize, renderTargets, baker]
   );
 
-  React.useEffect(() => () => baker.dispose(), []);
+  React.useEffect(
+    () => () => {
+      for (const fbo of Object.values(renderTargets)) {
+        fbo.dispose();
+      }
+    },
+    [renderTargets]
+  );
+
+  React.useEffect(
+    () => () => {
+      baker.dispose();
+    },
+    [baker]
+  );
 
   return (
     <context.Provider value={value}>
