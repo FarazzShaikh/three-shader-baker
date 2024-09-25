@@ -88,6 +88,10 @@ function Mesh() {
 
 </details>
 
+## License
+
+This project is licensed under the AGPL-3.0 License. See the [LICENSE](LICENSE.md) file for details.Please email me at [farazzshaikh@gmail.com](mailto:farazzshaikh@gmail.com) if you would like to use this library under a different license.
+
 ## Installation
 
 ```bash
@@ -204,7 +208,3 @@ Converts a texture to a data URL.
 Downloads a texture as a png file.
 
 </details>
-
-## License
-
-This project is licensed under the AGPL-3.0 License. **SOURCE CODE MUST BE MADE AVAILABLE WHEN THE LICENSED MATERIAL IS DISTRIBUTED**. See the [LICENSE](LICENSE) file for details.
