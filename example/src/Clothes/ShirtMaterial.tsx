@@ -81,7 +81,7 @@ export function ShirtMaterial({ seed }: { seed: number }) {
         },
         {
           easing: "ease-in-out",
-          duration: 2
+          duration: 1
         }
       );
 
