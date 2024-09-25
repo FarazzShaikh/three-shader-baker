@@ -1,0 +1,22 @@
+name: "CLA Signature Bot"
+on:
+  issue_comment:
+    types: [created]
+  pull_request:
+    types: [opened, closed, synchronize]
+
+jobs:
+  CLABot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "CLA Signature Bot"
+        uses: roblox/cla-assistant@2.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path-to-signatures: "signatures/version1/cla.json"
+          url-to-cladocument: "https://gist.github.com/FarazzShaikh/eff594615eee628ce07680436d4cdf69"
+          # This branch can't have protections, commits are made directly to the specified branch.
+          branch: "main"
+          whitelist: farazzshaikh
+          blockchain-storage-flag: false
