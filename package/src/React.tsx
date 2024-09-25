@@ -29,7 +29,7 @@ interface TextureBakerProps {
 export function ShaderBaker({
   size: propsSize = 1024,
   dilation = 2,
-  children,
+  children
 }: React.PropsWithChildren<TextureBakerProps>) {
   const gl = useThree((s) => s.gl);
   const scene = useThree((s) => s.scene);
@@ -76,7 +76,7 @@ export function ShaderBaker({
             target: currentFbo,
             size: _size,
             scene,
-            dilation: options?.dilation || dilation,
+            dilation: options?.dilation || dilation
           });
 
           if (
@@ -95,7 +95,7 @@ export function ShaderBaker({
         }
 
         return newTextures;
-      },
+      }
     }),
     [dilation, scene, gl, propsSize, renderTargets, baker]
   );

@@ -48,11 +48,11 @@ export function SkirtMaterial({ seed }: { seed: number }) {
     () => ({
       uSeed: { value: 0 },
       uColorA: {
-        value: new Color(palette[0]),
+        value: new Color(palette[0])
       },
       uColorB: {
-        value: new Color(palette[1]),
-      },
+        value: new Color(palette[1])
+      }
     }),
     []
   );
@@ -79,7 +79,7 @@ export function SkirtMaterial({ seed }: { seed: number }) {
         },
         {
           easing: "ease-in-out",
-          duration: 2,
+          duration: 2
         }
       );
 

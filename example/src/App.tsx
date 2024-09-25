@@ -4,7 +4,7 @@ import {
   ContactShadows,
   Environment,
   OrbitControls,
-  RandomizedLight,
+  RandomizedLight
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import "./styles.css";
@@ -12,7 +12,7 @@ import "./styles.css";
 import {
   ShaderBaker,
   ShaderBakerExclusion,
-  useShaderBaker,
+  useShaderBaker
 } from "texture-baker/react";
 
 import { useEffect, useState } from "react";
@@ -53,7 +53,7 @@ export default function App() {
       <Canvas
         shadows
         camera={{
-          position: [-2, 1, 5],
+          position: [-2, 1, 5]
         }}
       >
         <OrbitControls
@@ -117,9 +117,6 @@ export default function App() {
           />
         </EffectComposer>
       </Canvas>
-
-      {/* <Leva collapsed /> */}
-      {/* <Copy /> */}
     </>
   );
 }

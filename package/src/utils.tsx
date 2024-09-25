@@ -4,7 +4,7 @@ const exportPlane = new THREE.Mesh(
   new THREE.PlaneGeometry(2, 2, 1, 1),
   new THREE.ShaderMaterial({
     uniforms: {
-      tDiffuse: { value: null },
+      tDiffuse: { value: null }
     },
     vertexShader: `
       varying vec2 vUv;
@@ -26,7 +26,7 @@ const exportPlane = new THREE.Mesh(
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
       }
-    `,
+    `
   })
 );
 

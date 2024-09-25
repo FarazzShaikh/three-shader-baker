@@ -5,7 +5,7 @@ import {
   CardBody,
   Heading,
   Stack,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import { memo, useEffect, useRef, useState } from "react";
 import { downloadTexture, getTextureAsDataUrl } from "texture-baker";
@@ -14,7 +14,7 @@ import * as THREE from "three";
 export const Canvas = memo(
   ({
     fbo,
-    gl,
+    gl
   }: {
     fbo: THREE.WebGLRenderTarget | THREE.WebGL3DRenderTarget;
     gl: THREE.WebGLRenderer;
@@ -84,7 +84,7 @@ export const Canvas = memo(
                 <canvas
                   style={{
                     width: "100%",
-                    height: "100%",
+                    height: "100%"
                   }}
                   ref={canvasRef}
                 />

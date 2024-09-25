@@ -63,7 +63,7 @@ const dataUrl = getTextureAsDataUrl(renderer, fbo.texture);
 import {
   ShaderBaker,
   useShaderBaker,
-  getTextureAsDataUrl,
+  getTextureAsDataUrl
 } from "three-shader-baker/react";
 
 function Mesh() {

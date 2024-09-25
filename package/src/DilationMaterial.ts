@@ -5,11 +5,11 @@ export class DilationMaterial extends THREE.ShaderMaterial {
     super({
       uniforms: {
         uTexture: {
-          value: null,
+          value: null
         },
         uDilation: {
-          value: 2,
-        },
+          value: 2
+        }
       },
       vertexShader: /* glsl */ `
         varying vec2 vUv;
@@ -42,7 +42,7 @@ export class DilationMaterial extends THREE.ShaderMaterial {
           gl_FragColor = color;
         }
 
-      `,
+      `
     });
   }
 

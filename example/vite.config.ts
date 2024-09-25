@@ -13,7 +13,7 @@ export default defineConfig({
         __dirname,
         "../package/src/React.tsx"
       ),
-      "texture-baker": path.resolve(__dirname, "../package/src/index.ts"),
-    },
-  },
+      "texture-baker": path.resolve(__dirname, "../package/src/index.ts")
+    }
+  }
 });

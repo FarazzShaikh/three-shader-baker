@@ -24,7 +24,7 @@ export class ShaderBaker {
     this._bakeFbo = new THREE.WebGLRenderTarget(1024, 1024, {
       depthBuffer: false,
       stencilBuffer: false,
-      format: THREE.RGBAFormat,
+      format: THREE.RGBAFormat
     });
   }
 
@@ -45,7 +45,7 @@ export class ShaderBaker {
       new THREE.WebGLRenderTarget(size, size, {
         depthBuffer: false,
         stencilBuffer: false,
-        format: THREE.RGBAFormat,
+        format: THREE.RGBAFormat
       });
     const scene = options.scene;
     const dilation = options.dilation || 2;

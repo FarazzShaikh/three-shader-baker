@@ -13,7 +13,7 @@ function copyLicensePlugin() {
     closeBundle: async () => {
       await fs.copyFile("../LICENSE.md", "./LICENSE.md");
       await fs.copyFile("../README.md", "./README.md");
-    },
+    }
   };
 }
 
@@ -22,25 +22,25 @@ export default defineConfig({
     lib: {
       entry: {
         vanilla: path.resolve(__dirname, "src/index.ts"),
-        react: path.resolve(__dirname, "src/React.tsx"),
+        react: path.resolve(__dirname, "src/React.tsx")
       },
-      name: "custom-shader-material",
+      name: "custom-shader-material"
     },
     rollupOptions: {
       external: ["react", "react-dom", "@react-three/fiber", "three"],
       output: [
         {
           format: "es",
-          entryFileNames: `entry/es/[name].js`,
+          entryFileNames: `entry/es/[name].js`
         },
         {
           format: "cjs",
-          entryFileNames: `entry/cjs/[name].cjs`,
-        },
-      ],
+          entryFileNames: `entry/cjs/[name].cjs`
+        }
+      ]
     },
     sourcemap: true,
-    emptyOutDir: true,
+    emptyOutDir: true
   },
-  plugins: [react(), dts(), copyLicensePlugin()],
+  plugins: [react(), dts(), copyLicensePlugin()]
 });

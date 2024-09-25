@@ -34,7 +34,7 @@ export const N8AO = forwardRef<N8AOPostPass, N8AOProps>(
       distanceFalloff = 1,
       intensity = 1,
       color,
-      renderMode = 0,
+      renderMode = 0
     },
     ref: Ref<N8AOPostPass>
   ) => {
@@ -52,7 +52,7 @@ export const N8AO = forwardRef<N8AOPostPass, N8AOProps>(
         screenSpaceRadius,
         renderMode,
         halfRes,
-        depthAwareUpsampling,
+        depthAwareUpsampling
       });
     }, [
       screenSpaceRadius,
@@ -65,7 +65,7 @@ export const N8AO = forwardRef<N8AOPostPass, N8AOProps>(
       denoiseRadius,
       renderMode,
       halfRes,
-      depthAwareUpsampling,
+      depthAwareUpsampling
     ]);
     useLayoutEffect(() => {
       if (quality)

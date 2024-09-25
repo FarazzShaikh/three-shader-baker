@@ -8,7 +8,9 @@
   "author": "Faraz Shaikh <farazzshaikh@gmail.com>",
   "license": "AGPL-3.0-or-later",
   "files": [
-    "dist/**"
+    "dist/**",
+    "README.md",
+    "LICENSE.md"
   ],
   "main": "dist/entry/cjs/vanilla.cjs",
   "module": "dist/entry/es/vanilla.js",

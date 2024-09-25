@@ -5,7 +5,7 @@ import {
   HStack,
   Input,
   Text,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
@@ -143,7 +143,7 @@ export function TextureViewer3D({ onRandomize }: { onRandomize: () => void }) {
               top: "50%",
               left: "0",
               transform: "translate(-100%, -50%)",
-              zIndex: 1000,
+              zIndex: 1000
             }}
           >
             <line
@@ -178,7 +178,7 @@ export function TextureViewer3D({ onRandomize }: { onRandomize: () => void }) {
               top: "50%",
               right: "0",
               transform: "translate(100%, -50%)",
-              zIndex: 1000,
+              zIndex: 1000
             }}
           >
             <line

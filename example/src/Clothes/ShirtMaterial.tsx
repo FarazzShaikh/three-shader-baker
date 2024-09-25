@@ -50,11 +50,11 @@ export function ShirtMaterial({ seed }: { seed: number }) {
     () => ({
       uSeed: { value: 0 },
       uColorA: {
-        value: new Color(palette[3]),
+        value: new Color(palette[3])
       },
       uColorB: {
-        value: new Color(palette[4]),
-      },
+        value: new Color(palette[4])
+      }
     }),
     []
   );
@@ -81,7 +81,7 @@ export function ShirtMaterial({ seed }: { seed: number }) {
         },
         {
           easing: "ease-in-out",
-          duration: 2,
+          duration: 2
         }
       );
 
