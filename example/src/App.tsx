@@ -13,7 +13,7 @@ import {
   ShaderBaker,
   ShaderBakerExclusion,
   useShaderBaker
-} from "texture-baker/react";
+} from "three-shader-baker/react";
 
 import { useEffect, useState } from "react";
 

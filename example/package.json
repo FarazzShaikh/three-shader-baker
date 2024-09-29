@@ -24,7 +24,8 @@
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.3.1",
     "three": "0.167.0",
-    "three-custom-shader-material": "^6.0.3"
+    "three-custom-shader-material": "^6.0.3",
+    "three-shader-baker": "file:../package/dist"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

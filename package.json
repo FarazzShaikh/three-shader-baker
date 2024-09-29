@@ -17,6 +17,7 @@
     "build": "yarn --cwd example build",
     "preview": "yarn --cwd example preview",
     "dev": "yarn --cwd example dev",
-    "release": "yarn --cwd package release"
+    "release": "yarn --cwd package release",
+    "version": "yarn --cwd package version"
   }
 }

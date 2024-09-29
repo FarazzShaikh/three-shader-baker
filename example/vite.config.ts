@@ -9,11 +9,11 @@ export default defineConfig({
   plugins: [react(), svgr()],
   resolve: {
     alias: {
-      "texture-baker/react": path.resolve(
+      "three-shader-baker/react": path.resolve(
         __dirname,
-        "../package/src/React.tsx"
+        "../package/src/React/index.tsx"
       ),
-      "texture-baker": path.resolve(__dirname, "../package/src/index.ts")
+      "three-shader-baker": path.resolve(__dirname, "../package/src/index.ts")
     }
   }
 });

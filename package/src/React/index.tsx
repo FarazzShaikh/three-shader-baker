@@ -1,7 +1,7 @@
 import { useThree } from "@react-three/fiber";
 import * as React from "react";
 import * as THREE from "three";
-import { ShaderBaker as ShaderBakerImpl } from ".";
+import { ShaderBaker as ShaderBakerImpl } from "..";
 
 interface TextureBakerAPI {
   renderTargets: {
@@ -147,4 +147,4 @@ export function useShaderBaker() {
   return contextValue;
 }
 
-export * from "./utils";
+export * from "../utils";

@@ -8,8 +8,8 @@ import {
   VStack
 } from "@chakra-ui/react";
 import { memo, useEffect, useRef, useState } from "react";
-import { downloadTexture, getTextureAsDataUrl } from "texture-baker";
 import * as THREE from "three";
+import { downloadTexture, getTextureAsDataUrl } from "three-shader-baker";
 
 export const Canvas = memo(
   ({

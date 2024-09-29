@@ -11,7 +11,7 @@ import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { useShaderBaker } from "texture-baker/react";
+import { useShaderBaker } from "three-shader-baker/react";
 import { Canvas } from "./Canvas";
 
 export function TextureViewer3D({ onRandomize }: { onRandomize: () => void }) {

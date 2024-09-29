@@ -7,29 +7,28 @@
   "repository": "https://github.com/FarazzShaikh/three-shader-baker",
   "author": "Faraz Shaikh <farazzshaikh@gmail.com>",
   "license": "AGPL-3.0-or-later",
+  "type": "module",
   "files": [
-    "dist/**",
-    "README.md",
-    "LICENSE.md"
+    "./**/*"
   ],
-  "main": "dist/entry/cjs/vanilla.cjs",
-  "module": "dist/entry/es/vanilla.js",
-  "types": "dist/React/index.d.ts",
+  "main": "three-shader-baker.cjs.js",
+  "module": "three-shader-baker.es.js",
+  "types": "vanilla.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/entry/es/vanilla.js",
-      "require": "./dist/entry/cjs/vanilla.cjs",
-      "types": "./dist/index.d.ts"
+      "import": "./three-shader-baker.es.js",
+      "require": "./three-shader-baker.cjs.js",
+      "types": "./vanilla.d.ts"
     },
     "./react": {
-      "import": "./dist/entry/es/react.js",
-      "require": "./dist/entry/cjs/react.cjs",
-      "types": "./dist/React/index.d.ts"
+      "import": "./react/three-shader-baker.es.js",
+      "require": "./react/three-shader-baker.cjs.js",
+      "types": "./react.d.ts"
     }
   },
   "scripts": {
     "build": "tsc && vite build",
-    "release": "yarn build && npm version"
+    "release": "yarn build && cp ./package.json ./dist/package.json && cd ./dist && npm publish"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
@@ -50,14 +49,6 @@
     "@react-three/fiber": ">=8.0",
     "react": ">=18.0",
     "three": ">=0.163"
-  },
-  "peerDependenciesMeta": {
-    "@react-three/fiber": {
-      "optional": true
-    },
-    "react": {
-      "optional": true
-    }
   },
   "dependencies": {}
 }
