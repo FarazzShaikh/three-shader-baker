@@ -13,7 +13,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "allowJs": true
+    "allowJs": true,
+    "incremental": false,
+    "paths": {
+      "three-shader-baker": ["../package/src/index.ts"],
+      "three-shader-baker/react": ["../package/src/React/index.tsx"]
+    }
   },
   "include": ["src"]
 }

@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 package/LICENSE.md
 package/README.md
+tsconfig.tsbuildinfo
