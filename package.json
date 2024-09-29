@@ -18,6 +18,6 @@
     "preview": "yarn --cwd example preview",
     "dev": "yarn --cwd example dev",
     "release": "yarn --cwd package release",
-    "version": "yarn --cwd package version"
+    "bump": "yarn --cwd package version"
   }
 }
