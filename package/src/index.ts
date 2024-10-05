@@ -37,18 +37,18 @@ export class ShaderBaker {
   bake(
     gl: THREE.WebGLRenderer,
     mesh: THREE.Mesh,
-    options: BakeOptions
+    options?: BakeOptions
   ): THREE.WebGLRenderTarget {
-    const size = options.size || 1024;
+    const size = options?.size || 1024;
     const targetFbo =
-      options.target ||
+      options?.target ||
       new THREE.WebGLRenderTarget(size, size, {
         depthBuffer: false,
         stencilBuffer: false,
         format: THREE.RGBAFormat
       });
-    const scene = options.scene;
-    const dilation = options.dilation || 2;
+    const scene = options?.scene;
+    const dilation = options?.dilation || 2;
 
     targetFbo.setSize(size, size);
     this._bakeFbo.setSize(size, size);
