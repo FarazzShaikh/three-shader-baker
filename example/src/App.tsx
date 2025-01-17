@@ -1,3 +1,4 @@
+import * as THREE from "three";
 import {
   AccumulativeShadows,
   Bounds,
@@ -15,6 +16,7 @@ import {
   useShaderBaker
 } from "three-shader-baker/react";
 
+import { ShaderBaker as ShaderBakerImpl } from "three-shader-baker";
 import { useEffect, useState } from "react";
 
 import { EffectComposer } from "@react-three/postprocessing";
@@ -23,6 +25,8 @@ import { MathUtils } from "three";
 import { Clothes } from "./Clothes";
 import { N8AO } from "./N8AO";
 import { TextureViewer3D } from "./TextureViewer3D";
+
+const sb = new ShaderBakerImpl();
 
 function Thing() {
   const { bake } = useShaderBaker();
@@ -48,9 +52,49 @@ function Thing() {
 }
 
 export default function App() {
+  const [scene, setScene] = useState<THREE.Scene>(null);
+  const [gl, setGl] = useState<THREE.WebGLRenderer>(null);
+
+  function downloadGLTF() {
+    const exporter = sb.exportAsBakedGLTF(scene, gl);
+    exporter({
+      onDone: (gltf) => {
+        const blob = new Blob([JSON.stringify(gltf)], {
+          type: "application/json"
+        });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "scene.gltf";
+        link.click();
+
+        URL.revokeObjectURL(url);
+      },
+      onError: (error) => {
+        console.log(error);
+      }
+    });
+  }
+
   return (
     <>
+      <button
+        onClick={downloadGLTF}
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          zIndex: 1000
+        }}
+      >
+        Export
+      </button>
       <Canvas
+        onCreated={({ scene, gl }) => {
+          setScene(scene);
+          setGl(gl);
+        }}
         shadows
         camera={{
           position: [-2, 1, 5]

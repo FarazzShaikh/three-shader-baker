@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter";
+
 import { DilationMaterial } from "./DilationMaterial";
 import { FullScreenQuad } from "./FullScreenQuad";
 
@@ -118,6 +120,32 @@ export class ShaderBaker {
     material.side = prevSide;
 
     return targetFbo;
+  }
+
+  exportAsBakedGLTF(
+    scene: THREE.Scene,
+    gl: THREE.WebGLRenderer,
+    options?: BakeOptions
+  ): ({
+    onDone,
+    onError
+  }: {
+    onDone: Parameters<InstanceType<typeof GLTFExporter>["parse"]>[1]; // onDone param
+    onError: Parameters<InstanceType<typeof GLTFExporter>["parse"]>[2]; // onError param
+  }) => any {
+    scene.traverse((object) => {
+      console.log(object);
+      if (object instanceof THREE.Mesh) {
+        const texture = this.bake(gl, object, options).texture;
+        object.material = new THREE.MeshBasicMaterial({
+          ...object.material,
+          map: texture
+        });
+      }
+    });
+
+    return ({ onDone, onError }) =>
+      new GLTFExporter().parse(scene, onDone, onError);
   }
 }
 
