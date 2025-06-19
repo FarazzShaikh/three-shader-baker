@@ -64,6 +64,7 @@ export class ShaderBaker {
     };
 
     const prevOnBeforeCompile = material.onBeforeCompile;
+    const prevCacheKey = material.customProgramCacheKey;
 
     material.onBeforeCompile = (shader, renderer) => {
       prevOnBeforeCompile(shader, renderer);
@@ -95,6 +96,9 @@ export class ShaderBaker {
         );
       }
     };
+    material.customProgramCacheKey = () => {
+      return THREE.MathUtils.generateUUID();
+    };
 
     const prevEnvMap = material.envMap;
     const prevSide = material.side;
@@ -104,7 +108,6 @@ export class ShaderBaker {
     gl.setRenderTarget(this._bakeFbo);
     gl.clear();
     gl.render(mesh, this._orthoCamera);
-    gl.setRenderTarget(null);
 
     gl.setRenderTarget(targetFbo);
     this._fsQuad.material = this._dilationMaterial;
@@ -115,6 +118,7 @@ export class ShaderBaker {
 
     material.envMap = prevEnvMap;
     material.onBeforeCompile = prevOnBeforeCompile;
+    material.customProgramCacheKey = prevCacheKey;
     material.side = prevSide;
 
     return targetFbo;

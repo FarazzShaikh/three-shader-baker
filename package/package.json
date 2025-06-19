@@ -1,7 +1,6 @@
 {
   "name": "three-shader-baker",
   "description": "Bake your Three.js shaders or materials into textures!",
-  "private": false,
   "version": "1.0.8",
   "homepage": "https://farazzshaikh.github.io/three-shader-baker/",
   "repository": "https://github.com/FarazzShaikh/three-shader-baker",
@@ -32,9 +31,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@types/three": "^0.168.0",
+    "@types/react-dom": "^19.1.6",
+    "@types/three": "^0.177.0",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
@@ -47,8 +45,6 @@
   },
   "peerDependencies": {
     "@react-three/fiber": ">=8.0",
-    "react": ">=18.0",
-    "three": ">=0.163"
-  },
-  "dependencies": {}
+    "three": ">=0.170"
+  }
 }

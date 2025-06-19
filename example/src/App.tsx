@@ -17,11 +17,10 @@ import {
 
 import { useEffect, useState } from "react";
 
-import { EffectComposer } from "@react-three/postprocessing";
+import { EffectComposer, N8AO } from "@react-three/postprocessing";
 import { isDesktop } from "react-device-detect";
 import { MathUtils } from "three";
 import { Clothes } from "./Clothes";
-import { N8AO } from "./N8AO";
 import { TextureViewer3D } from "./TextureViewer3D";
 
 function Thing() {

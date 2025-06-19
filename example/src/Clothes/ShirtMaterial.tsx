@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { Color, DoubleSide, MathUtils, MeshStandardMaterial } from "three";
 import CSM from "three-custom-shader-material";
 
-import { animate, AnimationControls } from "motion";
+import { animate, AnimationPlaybackControls } from "motion";
 import colors from "nice-color-palettes";
 import voronoi from "./shaders/voronoi";
 
@@ -59,7 +59,7 @@ export function ShirtMaterial({ seed }: { seed: number }) {
     []
   );
 
-  const animationRef = useRef<AnimationControls | null>(null);
+  const animationRef = useRef<AnimationPlaybackControls | null>(null);
   const didRunFistTime = useRef(false);
   useEffect(() => {
     if (didRunFistTime.current) {
@@ -73,20 +73,17 @@ export function ShirtMaterial({ seed }: { seed: number }) {
       const targetA = new Color(palette[i1]);
       const targetB = new Color(palette[i2]);
       const currentSeed = uniforms.uSeed.value;
-      animationRef.current = animate(
-        (t) => {
+      animationRef.current = animate(0, 1, {
+        onUpdate: (t) => {
           uniforms.uSeed.value = MathUtils.lerp(currentSeed, seed, t);
           uniforms.uColorA.value.lerp(targetA, t);
           uniforms.uColorB.value.lerp(targetB, t);
         },
-        {
-          easing: "ease-in-out",
-          duration: 1
-        }
-      );
-
-      animationRef.current.finished.then(() => {
-        animationRef.current = null;
+        onComplete: () => {
+          animationRef.current = null;
+        },
+        duration: 1,
+        ease: "easeInOut"
       });
     } else {
       didRunFistTime.current = true;

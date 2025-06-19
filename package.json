@@ -19,5 +19,6 @@
     "dev": "yarn --cwd example dev",
     "release": "yarn --cwd package release",
     "bump": "yarn --cwd package version"
-  }
+  },
+  "packageManager": "yarn@4.9.2"
 }
