@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "tsc && vite build",
-    "release": "yarn build && cp ./package.json ./dist/package.json && cd ./dist && npm publish"
+    "release": "yarn build && cp ./package.json ./dist/package.json && cd ./dist"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
